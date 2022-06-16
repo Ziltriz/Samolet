@@ -63,7 +63,7 @@ namespace Samolet
 
             model = new Model();
             //model.LoadFromObj(new StreamReader("c:\\1.obj"));
-            model.LoadFromObj(new StreamReader(new WebClient().OpenRead("http://www.wonthelp.info/superjoebob/TutorialImages/objPlane.obj")));
+            model.LoadFromObj(new StreamReader("./objPlane.obj"));
 
 
             pictureBox1.Bounds = new Rectangle(43, 220, 500, 500);
