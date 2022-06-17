@@ -16,6 +16,9 @@ namespace Samolet
         public int b;
         public int c;
         public int d;
+        public int o1;
+        public int o2;
+        public int o3;
         public int param1 = 142;
         public int param2 = 130;
         public int param3 = 142;
@@ -35,7 +38,7 @@ namespace Samolet
         public int Param52 = 188;
         public int Param62 = 186;
         //public int Param72 = 220;
-        float angle = 0;
+        
         public int n = 0;
         Image image1 = Image.FromFile(@"C:\Users\lilm8\Desktop\samolet\Samolet\Samolet\22.png");
         Model model;
@@ -59,6 +62,7 @@ namespace Samolet
             label12.Text = String.Format(""  + trackBar2.Value);
             label13.Text = String.Format("" + (trackBar2.Value + 20));
             label14.Text = String.Format("" + (trackBar2.Value + 40));
+            
 
 
             model = new Model();
@@ -66,7 +70,7 @@ namespace Samolet
             model.LoadFromObj(new StreamReader("./objPlane.obj"));
 
 
-            pictureBox1.Bounds = new Rectangle(43, 220, 500, 500);
+            
             pictureBox1.Paint += new PaintEventHandler(pictureBox1_Paint);
             pictureBox3.Paint += new PaintEventHandler(pictureBox3_Paint);
 
@@ -101,11 +105,11 @@ namespace Samolet
             g.DrawLine(WhitePen, param1, param2, param3, param4);
         }
 
-        float yaw = 0;
+        float yaw = 74;
         float pitch = 0;
-        float roll = 0;
+        float roll = 22;
         float scale = 10;
-        Vector3 position = new Vector3(200, 200, 200);
+        Vector3 position = new Vector3(400, 200, 400);
         void pictureBox1_Paint(object sender, PaintEventArgs e)
         {
             var scaleM = Matrix4x4.CreateScale(scale / 2);
@@ -152,9 +156,11 @@ namespace Samolet
         public void trackBar1_MouseUp(object sender, EventArgs e)
         {
             pictureBox1.Invalidate();
-            angle = 0f;
-            param4 = (int)(90 * Math.Sin((2 * Math.PI * (trackBar1.Value - 2500)) / 10000) + 130);
-            param3 = (int)(90 * Math.Cos((2 * Math.PI * (trackBar1.Value - 2500)) / 10000) + 142);
+             yaw = 74;
+             pitch = 0;
+             roll = 22;
+            param4 = (int)(90 * Math.Sin((2 * Math.PI * (trackBar1.Value - 2500)) / 10000) + 155);
+            param3 = (int)(90 * Math.Cos((2 * Math.PI * (trackBar1.Value - 2500)) / 10000) + 322);
             Line(param3, param4);
             Param1 = 140;
             Param2 = 206;
@@ -183,7 +189,8 @@ namespace Samolet
             if (b > trackBar1.Value)
             {
                 pictureBox1.Invalidate();
-                angle = -14f;
+                pitch = -70;
+                roll = 22;
                 Param2 = (int)((20 * Math.Sin(Math.PI / 4) + 206) );
                 Param1 = (int)(20 * Math.Cos(Math.PI / 4) + 168);
                 Param4 = (int)((80 * Math.Sin(Math.PI / 4) + 206) );
@@ -196,15 +203,16 @@ namespace Samolet
                 Param32 = (int)(80 * Math.Cos(Math.PI * 5 / 4) + 168);
                 Param62 = (int)((60 * Math.Sin(Math.PI * 5 / 6) + 206) );
                 Param52 = (int)(60 * Math.Cos(Math.PI * 5 / 6) + 168);
-                yaw = b;
-                pitch = b;
-                roll = 0;
-                scale = 10;
+                
+                
+                
+                
 
             } else
             {
                 pictureBox1.Invalidate();
-                angle = 14f;
+                pitch = -50;
+                roll = 4;
                 Param2 = (int)(20 * Math.Sin(Math.PI *7/4) + 206);
                 Param1 = (int)(20 * Math.Cos(Math.PI *7/ 4) + 168);
                 Param4 = (int)(80 * Math.Sin(Math.PI *7/ 4) + 206);
@@ -217,17 +225,17 @@ namespace Samolet
                 Param32 = (int)(80 * Math.Cos(-Math.PI * 5 / 4) + 168);
                 Param62 = (int)(60 * Math.Sin((-Math.PI * 4 / 6) - Math.PI) + 206);
                 Param52 = (int)(60 * Math.Cos((-Math.PI * 4 / 6) - Math.PI) + 168);
-                yaw = b;
-                pitch = 0;
-                roll = b;
-                scale = 10;
+               
+                
+                
+               
 
             }
             pictureBox2.Image = Properties.Resources.visot1;
 ;
             Line2(Param1, Param2, Param3, Param4, Param5, Param6, Param12, Param22, Param32, Param42, Param52, Param62);
-            param4 = (int)(90*Math.Sin((2 * Math.PI * (trackBar1.Value - 2500)) / 10000)+130);
-            param3 = (int)(90*Math.Cos((2 * Math.PI * (trackBar1.Value - 2500)) / 10000)+142);
+            param4 = (int)(90*Math.Sin((2 * Math.PI * (trackBar1.Value - 2500)) / 10000)+155 );
+            param3 = (int)(90*Math.Cos((2 * Math.PI * (trackBar1.Value - 2500)) / 10000)+322 );
             pictureBox3.Image = Properties.Resources.res;
             Line(param3, param4);
          
@@ -239,14 +247,14 @@ namespace Samolet
            
             Graphics g = pictureBox3.CreateGraphics();
             Pen WhitePen = new Pen(Color.FromArgb(255, 255, 0, 0), 4);
-            g.DrawLine(WhitePen, param1, param2, param3, param4);
+            g.DrawLine(WhitePen, param1 + 180, param2 + 25, param3, param4);
         }
 
         private void Line2(int Param1, int Param2, int Param3, int Param4, int Param5, int Param6, int Param12, int Param22, int Param32, int Param42,
             int Param52, int Param62)
         {
             double j = (((trackBar1.Value * 100)/ 9500)+0.001);
-            Param2 = (int)(Param2 - j);
+            Param2 = (int)(Param2 - j) ;
             Param4 = (int)(Param4 - j);
             Param22 = (int)(Param22 -j);
             Param42 = (int)(Param42 - j);
@@ -255,10 +263,10 @@ namespace Samolet
             Graphics g = pictureBox2.CreateGraphics();
             //g.Clear(Color.White);
             Pen YellowPen = new Pen(Color.FromArgb(255, 255, 255, 0), 4);
-            g.DrawLine(YellowPen, Param1, Param2, Param3, Param4);
-            g.DrawLine(YellowPen, Param12, Param22, Param32, Param42);
-            g.DrawLine(YellowPen, Param1, Param2, Param5, Param6);
-            g.DrawLine(YellowPen, Param12, Param22, Param52, Param62);
+            g.DrawLine(YellowPen, Param1 + 110, Param2, Param3 + 110, Param4);
+            g.DrawLine(YellowPen, Param12 + 110, Param22, Param32 + 110, Param42);
+            g.DrawLine(YellowPen, Param1 + 110, Param2, Param5 + 110, Param6);
+            g.DrawLine(YellowPen, Param12 + 110, Param22, Param52 + 110, Param62);
             //g.DrawLine(YellowPen, Param1, Param2, Param1, Param2 + 8);
             
         }
@@ -430,7 +438,7 @@ namespace Samolet
             | System.Windows.Forms.AnchorStyles.Left)));
             this.label22.AutoSize = true;
             this.label22.BackColor = System.Drawing.SystemColors.Control;
-            this.label22.Location = new System.Drawing.Point(862, 62);
+            this.label22.Location = new System.Drawing.Point(848, 52);
             this.label22.Name = "label22";
             this.label22.Size = new System.Drawing.Size(18, 20);
             this.label22.TabIndex = 33;
@@ -485,7 +493,7 @@ namespace Samolet
             this.pictureBox12.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox12.Image")));
             this.pictureBox12.Location = new System.Drawing.Point(231, 199);
             this.pictureBox12.Name = "pictureBox12";
-            this.pictureBox12.Size = new System.Drawing.Size(221, 182);
+            this.pictureBox12.Size = new System.Drawing.Size(188, 182);
             this.pictureBox12.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox12.TabIndex = 34;
             this.pictureBox12.TabStop = false;
@@ -513,7 +521,7 @@ namespace Samolet
             // 
             this.label25.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label25.AutoSize = true;
-            this.label25.Location = new System.Drawing.Point(309, 384);
+            this.label25.Location = new System.Drawing.Point(287, 384);
             this.label25.Name = "label25";
             this.label25.Size = new System.Drawing.Size(52, 20);
             this.label25.TabIndex = 37;
@@ -545,10 +553,10 @@ namespace Samolet
             this.label27.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.label27.AutoSize = true;
             this.label27.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.label27.Location = new System.Drawing.Point(151, 139);
+            this.label27.Location = new System.Drawing.Point(142, 128);
             this.label27.Name = "label27";
-            this.label27.Padding = new System.Windows.Forms.Padding(0, 0, 167, 0);
-            this.label27.Size = new System.Drawing.Size(396, 20);
+            this.label27.Padding = new System.Windows.Forms.Padding(0, 0, 90, 0);
+            this.label27.Size = new System.Drawing.Size(319, 20);
             this.label27.TabIndex = 42;
             this.label27.Text = "Инерциальная система отсчета";
             // 
@@ -558,7 +566,7 @@ namespace Samolet
             this.pictureBox4.BackColor = System.Drawing.Color.Yellow;
             this.pictureBox4.Location = new System.Drawing.Point(642, 52);
             this.pictureBox4.Name = "pictureBox4";
-            this.pictureBox4.Size = new System.Drawing.Size(368, 533);
+            this.pictureBox4.Size = new System.Drawing.Size(332, 561);
             this.pictureBox4.TabIndex = 46;
             this.pictureBox4.TabStop = false;
             // 
@@ -566,8 +574,8 @@ namespace Samolet
             // 
             this.label18.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label18.AutoSize = true;
-            this.label18.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
-            this.label18.Location = new System.Drawing.Point(649, 129);
+            this.label18.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
+            this.label18.Location = new System.Drawing.Point(642, 139);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(131, 40);
             this.label18.TabIndex = 27;
@@ -578,10 +586,10 @@ namespace Samolet
             // 
             this.pictureBox6.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.pictureBox6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
-            this.pictureBox6.Location = new System.Drawing.Point(862, 62);
+            this.pictureBox6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
+            this.pictureBox6.Location = new System.Drawing.Point(828, 105);
             this.pictureBox6.Name = "pictureBox6";
-            this.pictureBox6.Size = new System.Drawing.Size(130, 436);
+            this.pictureBox6.Size = new System.Drawing.Size(130, 393);
             this.pictureBox6.TabIndex = 2;
             this.pictureBox6.TabStop = false;
             // 
@@ -590,8 +598,8 @@ namespace Samolet
             this.label19.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label19.AutoSize = true;
-            this.label19.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
-            this.label19.Location = new System.Drawing.Point(888, 223);
+            this.label19.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
+            this.label19.Location = new System.Drawing.Point(850, 253);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(85, 60);
             this.label19.TabIndex = 28;
@@ -602,7 +610,7 @@ namespace Samolet
             // 
             this.label21.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.label21.AutoSize = true;
-            this.label21.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            this.label21.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
             this.label21.Location = new System.Drawing.Point(865, 525);
             this.label21.Name = "label21";
             this.label21.Size = new System.Drawing.Size(93, 40);
@@ -614,7 +622,7 @@ namespace Samolet
             // 
             this.label20.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.label20.AutoSize = true;
-            this.label20.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            this.label20.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
             this.label20.Location = new System.Drawing.Point(671, 525);
             this.label20.Name = "label20";
             this.label20.Padding = new System.Windows.Forms.Padding(10);
@@ -628,11 +636,11 @@ namespace Samolet
             this.label29.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.label29.AutoSize = true;
             this.label29.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.label29.Location = new System.Drawing.Point(435, 463);
+            this.label29.Location = new System.Drawing.Point(501, 463);
             this.label29.Name = "label29";
-            this.label29.Padding = new System.Windows.Forms.Padding(0, 0, 256, 0);
+            this.label29.Padding = new System.Windows.Forms.Padding(0, 0, 165, 0);
             this.label29.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.label29.Size = new System.Drawing.Size(437, 20);
+            this.label29.Size = new System.Drawing.Size(346, 20);
             this.label29.TabIndex = 44;
             this.label29.Text = "Выбранный курс/режим";
             this.label29.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -642,10 +650,10 @@ namespace Samolet
             this.label28.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.label28.AutoSize = true;
             this.label28.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.label28.Location = new System.Drawing.Point(397, 280);
+            this.label28.Location = new System.Drawing.Point(363, 278);
             this.label28.Name = "label28";
-            this.label28.Padding = new System.Windows.Forms.Padding(0, 0, 110, 0);
-            this.label28.Size = new System.Drawing.Size(363, 20);
+            this.label28.Padding = new System.Windows.Forms.Padding(0, 0, 30, 0);
+            this.label28.Size = new System.Drawing.Size(283, 20);
             this.label28.TabIndex = 43;
             this.label28.Text = "Курсовой маяк и наклон глиссады ";
             // 
@@ -763,6 +771,7 @@ namespace Samolet
             this.trackBar6.Size = new System.Drawing.Size(56, 62);
             this.trackBar6.TabIndex = 118;
             this.trackBar6.TickStyle = System.Windows.Forms.TickStyle.None;
+            this.trackBar6.Scroll += new System.EventHandler(this.trackBar6_Scroll);
             // 
             // label38
             // 
@@ -786,6 +795,7 @@ namespace Samolet
             this.trackBar5.Size = new System.Drawing.Size(56, 62);
             this.trackBar5.TabIndex = 114;
             this.trackBar5.TickStyle = System.Windows.Forms.TickStyle.None;
+            this.trackBar5.Scroll += new System.EventHandler(this.trackBar5_Scroll);
             // 
             // label35
             // 
@@ -828,6 +838,7 @@ namespace Samolet
             this.trackBar4.Size = new System.Drawing.Size(56, 62);
             this.trackBar4.TabIndex = 110;
             this.trackBar4.TickStyle = System.Windows.Forms.TickStyle.None;
+            this.trackBar4.Scroll += new System.EventHandler(this.trackBar4_Scroll);
             // 
             // label32
             // 
@@ -886,6 +897,7 @@ namespace Samolet
             // 
             // panel4
             // 
+            this.panel4.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.panel4.Controls.Add(this.trackBar1);
             this.panel4.Controls.Add(this.label3);
             this.panel4.Controls.Add(this.label1);
@@ -894,18 +906,17 @@ namespace Samolet
             this.panel4.Controls.Add(this.trackBar2);
             this.panel4.Controls.Add(this.label4);
             this.panel4.Controls.Add(this.label5);
-            this.panel4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel4.Enabled = false;
             this.panel4.Location = new System.Drawing.Point(300, 3);
+            this.panel4.MaximumSize = new System.Drawing.Size(987, 137);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(624, 136);
+            this.panel4.Size = new System.Drawing.Size(614, 137);
             this.panel4.TabIndex = 110;
             // 
             // trackBar1
             // 
-            this.trackBar1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.trackBar1.LargeChange = 100;
-            this.trackBar1.Location = new System.Drawing.Point(115, 7);
+            this.trackBar1.Location = new System.Drawing.Point(202, 7);
             this.trackBar1.Maximum = 9500;
             this.trackBar1.Name = "trackBar1";
             this.trackBar1.Size = new System.Drawing.Size(332, 56);
@@ -916,9 +927,8 @@ namespace Samolet
             // 
             // label3
             // 
-            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(6, 9);
+            this.label3.Location = new System.Drawing.Point(16, 18);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(50, 20);
             this.label3.TabIndex = 2;
@@ -926,9 +936,8 @@ namespace Samolet
             // 
             // label1
             // 
-            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(59, 7);
+            this.label1.Location = new System.Drawing.Point(123, 18);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(50, 20);
             this.label1.TabIndex = 13;
@@ -936,9 +945,8 @@ namespace Samolet
             // 
             // label2
             // 
-            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(453, 7);
+            this.label2.Location = new System.Drawing.Point(540, 7);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(50, 20);
             this.label2.TabIndex = 14;
@@ -946,9 +954,8 @@ namespace Samolet
             // 
             // label6
             // 
-            this.label6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(4, 52);
+            this.label6.Location = new System.Drawing.Point(13, 78);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(50, 20);
             this.label6.TabIndex = 19;
@@ -956,9 +963,8 @@ namespace Samolet
             // 
             // trackBar2
             // 
-            this.trackBar2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.trackBar2.LargeChange = 10;
-            this.trackBar2.Location = new System.Drawing.Point(115, 52);
+            this.trackBar2.Location = new System.Drawing.Point(202, 69);
             this.trackBar2.Maximum = 600;
             this.trackBar2.Name = "trackBar2";
             this.trackBar2.Size = new System.Drawing.Size(332, 56);
@@ -971,9 +977,8 @@ namespace Samolet
             // 
             // label4
             // 
-            this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(453, 52);
+            this.label4.Location = new System.Drawing.Point(540, 69);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(50, 20);
             this.label4.TabIndex = 22;
@@ -981,9 +986,8 @@ namespace Samolet
             // 
             // label5
             // 
-            this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(59, 52);
+            this.label5.Location = new System.Drawing.Point(123, 80);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(50, 20);
             this.label5.TabIndex = 21;
@@ -991,33 +995,39 @@ namespace Samolet
             // 
             // panel5
             // 
-            this.panel5.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
+            this.panel5.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel5.AutoSize = true;
             this.panel5.Controls.Add(this.pictureBox1);
-            this.panel5.Location = new System.Drawing.Point(3, 145);
+            this.panel5.Location = new System.Drawing.Point(3, 146);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(781, 514);
+            this.panel5.Size = new System.Drawing.Size(777, 508);
             this.panel5.TabIndex = 111;
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.pictureBox1.Location = new System.Drawing.Point(106, 104);
+            this.pictureBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pictureBox1.Location = new System.Drawing.Point(0, 0);
+            this.pictureBox1.MaximumSize = new System.Drawing.Size(781, 423);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(562, 304);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox1.Size = new System.Drawing.Size(777, 423);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
             this.pictureBox1.TabIndex = 5;
             this.pictureBox1.TabStop = false;
             // 
             // flowLayoutPanel2
             // 
-            this.flowLayoutPanel2.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.flowLayoutPanel2.AutoSize = true;
             this.flowLayoutPanel2.Controls.Add(this.panel1);
             this.flowLayoutPanel2.Controls.Add(this.panel6);
             this.flowLayoutPanel2.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.flowLayoutPanel2.Location = new System.Drawing.Point(790, 145);
+            this.flowLayoutPanel2.Location = new System.Drawing.Point(903, 146);
+            this.flowLayoutPanel2.Margin = new System.Windows.Forms.Padding(120, 3, 3, 3);
             this.flowLayoutPanel2.Name = "flowLayoutPanel2";
-            this.flowLayoutPanel2.Size = new System.Drawing.Size(497, 514);
+            this.flowLayoutPanel2.Size = new System.Drawing.Size(368, 508);
             this.flowLayoutPanel2.TabIndex = 112;
             // 
             // panel1
@@ -1035,22 +1045,23 @@ namespace Samolet
             this.panel1.Controls.Add(this.label8);
             this.panel1.Controls.Add(this.pictureBox2);
             this.panel1.Enabled = false;
-            this.panel1.Location = new System.Drawing.Point(3, 3);
+            this.panel1.Location = new System.Drawing.Point(50, 3);
+            this.panel1.MinimumSize = new System.Drawing.Size(251, 256);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(494, 259);
+            this.panel1.Size = new System.Drawing.Size(315, 256);
             this.panel1.TabIndex = 16;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
             // button4
             // 
-            this.button4.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.button4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.button4.BackColor = System.Drawing.Color.DimGray;
             this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.button4.Font = new System.Drawing.Font("Segoe UI", 12.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.button4.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.button4.Location = new System.Drawing.Point(623, 63);
+            this.button4.Location = new System.Drawing.Point(64, 51);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(21, 57);
+            this.button4.Size = new System.Drawing.Size(18, 60);
             this.button4.TabIndex = 112;
             this.button4.Text = "+";
             this.button4.UseVisualStyleBackColor = false;
@@ -1063,7 +1074,7 @@ namespace Samolet
             this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.button3.Font = new System.Drawing.Font("Segoe UI", 7.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.button3.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.button3.Location = new System.Drawing.Point(269, 8);
+            this.button3.Location = new System.Drawing.Point(170, 0);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(58, 28);
             this.button3.TabIndex = 111;
@@ -1079,7 +1090,7 @@ namespace Samolet
             this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.button2.Font = new System.Drawing.Font("Segoe UI", 7.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.button2.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.button2.Location = new System.Drawing.Point(182, 8);
+            this.button2.Location = new System.Drawing.Point(89, 0);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(62, 28);
             this.button2.TabIndex = 110;
@@ -1131,13 +1142,11 @@ namespace Samolet
             // 
             // label7
             // 
-            this.label7.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label7.AutoSize = true;
             this.label7.BackColor = System.Drawing.Color.DimGray;
             this.label7.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.label7.Location = new System.Drawing.Point(1129, 85);
+            this.label7.Location = new System.Drawing.Point(198, 84);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(50, 20);
             this.label7.TabIndex = 16;
@@ -1149,7 +1158,7 @@ namespace Samolet
             this.label9.AutoSize = true;
             this.label9.BackColor = System.Drawing.Color.DimGray;
             this.label9.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.label9.Location = new System.Drawing.Point(1129, -174);
+            this.label9.Location = new System.Drawing.Point(198, 154);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(50, 20);
             this.label9.TabIndex = 18;
@@ -1157,13 +1166,11 @@ namespace Samolet
             // 
             // label8
             // 
-            this.label8.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label8.AutoSize = true;
             this.label8.BackColor = System.Drawing.Color.Black;
             this.label8.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.label8.Location = new System.Drawing.Point(1129, 124);
+            this.label8.Location = new System.Drawing.Point(198, 124);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(50, 20);
             this.label8.TabIndex = 17;
@@ -1171,32 +1178,36 @@ namespace Samolet
             // 
             // pictureBox2
             // 
-            this.pictureBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.pictureBox2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pictureBox2.Image = global::Samolet.Properties.Resources.visot1;
-            this.pictureBox2.Location = new System.Drawing.Point(129, 0);
+            this.pictureBox2.Location = new System.Drawing.Point(0, 0);
             this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(251, 269);
+            this.pictureBox2.Size = new System.Drawing.Size(315, 256);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox2.TabIndex = 15;
             this.pictureBox2.TabStop = false;
             // 
             // panel6
             // 
-            this.panel6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel6.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.panel6.AutoSize = true;
+            this.panel6.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.panel6.Controls.Add(this.pictureBox3);
-            this.panel6.Location = new System.Drawing.Point(3, 268);
+            this.panel6.Location = new System.Drawing.Point(3, 265);
+            this.panel6.MaximumSize = new System.Drawing.Size(250, 236);
+            this.panel6.MinimumSize = new System.Drawing.Size(362, 240);
             this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(494, 234);
+            this.panel6.Size = new System.Drawing.Size(362, 240);
             this.panel6.TabIndex = 17;
             this.panel6.Paint += new System.Windows.Forms.PaintEventHandler(this.panel6_Paint);
             // 
             // pictureBox3
             // 
-            this.pictureBox3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.pictureBox3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pictureBox3.Image = global::Samolet.Properties.Resources.res;
-            this.pictureBox3.Location = new System.Drawing.Point(129, 10);
+            this.pictureBox3.Location = new System.Drawing.Point(0, 0);
             this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(251, 224);
+            this.pictureBox3.Size = new System.Drawing.Size(362, 240);
             this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox3.TabIndex = 6;
             this.pictureBox3.TabStop = false;
@@ -1215,18 +1226,15 @@ namespace Samolet
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(153)))), ((int)(((byte)(209)))));
-            this.panel2.Controls.Add(this.label26);
             this.panel2.Controls.Add(this.label22);
             this.panel2.Controls.Add(this.textBox1);
+            this.panel2.Controls.Add(this.label26);
             this.panel2.Controls.Add(this.label27);
             this.panel2.Controls.Add(this.label28);
             this.panel2.Controls.Add(this.label29);
             this.panel2.Controls.Add(this.label20);
             this.panel2.Controls.Add(this.label21);
             this.panel2.Controls.Add(this.label19);
-            this.panel2.Controls.Add(this.pictureBox6);
-            this.panel2.Controls.Add(this.label18);
-            this.panel2.Controls.Add(this.pictureBox4);
             this.panel2.Controls.Add(this.button1);
             this.panel2.Controls.Add(this.label25);
             this.panel2.Controls.Add(this.label24);
@@ -1235,6 +1243,9 @@ namespace Samolet
             this.panel2.Controls.Add(this.pictureBox11);
             this.panel2.Controls.Add(this.pictureBox10);
             this.panel2.Controls.Add(this.pictureBox9);
+            this.panel2.Controls.Add(this.pictureBox6);
+            this.panel2.Controls.Add(this.label18);
+            this.panel2.Controls.Add(this.pictureBox4);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(3, 3);
             this.panel2.Name = "panel2";
@@ -1252,6 +1263,7 @@ namespace Samolet
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.SizeChanged += new System.EventHandler(this.Form1_Resize);
             ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox9)).EndInit();
@@ -1275,8 +1287,10 @@ namespace Samolet
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar2)).EndInit();
             this.panel5.ResumeLayout(false);
+            this.panel5.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.flowLayoutPanel2.ResumeLayout(false);
+            this.flowLayoutPanel2.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
@@ -1455,7 +1469,7 @@ namespace Samolet
         {
             try
             {
-                System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo("C:\\Users\\lilm8\\Desktop\\samolet\\Samolet\\Samolet\\Boeing.pdf") { UseShellExecute =true});
+                System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo("Boeing.pdf") { UseShellExecute =true});
             }
             catch(Exception exp)
             {
@@ -1482,7 +1496,7 @@ namespace Samolet
         {
             if ((c + d) >= 2)
             {
-                Form2 form2 = new Form2();
+                Form2 form2 = new Form2(o1,o2,o3);
                 form2.Show();
                 c = 0;
                 d = 0;
@@ -1522,13 +1536,58 @@ namespace Samolet
         {
             if (this.WindowState == System.Windows.Forms.FormWindowState.Maximized)
             {
-                this.Font = new Font("Times New Roman", 24, FontStyle.Regular, GraphicsUnit.Pixel);
+                this.Font = new Font("Times New Roman", 24, FontStyle.Bold, GraphicsUnit.Pixel);
             }
             
         }
         private void panel6_Paint(object sender, PaintEventArgs e)
         {
 
+        }
+
+        private void trackBar4_Scroll(object sender, EventArgs e)
+        {
+            if (trackBar4.Value == 1)
+            {
+                label32.BackColor = Color.Green;
+                o1 = 1;
+
+            }
+            else
+            {
+                label32.BackColor = Color.Salmon;
+                o1 = 0;
+            }
+        }
+
+        private void trackBar5_Scroll(object sender, EventArgs e)
+        {
+            if (trackBar5.Value == 1)
+            {
+                label35.BackColor = Color.Green;
+                o2 = 2;
+
+            }
+            else
+            {
+                label35.BackColor = Color.Salmon;
+                o2 = 0;
+            }
+        }
+
+        private void trackBar6_Scroll(object sender, EventArgs e)
+        {
+            if (trackBar6.Value == 1)
+            {
+                label38.BackColor = Color.Green;
+                o3 = 3;
+
+            }
+            else
+            {
+                label38.BackColor = Color.Salmon;
+                o3 = 0;
+            }
         }
     }
 }
